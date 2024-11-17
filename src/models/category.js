@@ -2,7 +2,6 @@ import { Schema, model } from 'mongoose';
 import { OrderType } from './common.js';
 
 const CategorySchema = new Schema({
-    id: String,
     title: String,
     description: String,
     userId: String,
