@@ -2,8 +2,8 @@
     "type": "module",
     "scripts": {
         "start": "node --env-file=.env index.js",
-        "start:app": "node --env-file=.env app.js",
-        "start:prod": "node app.js"
+        "start:app": "node --env-file=.env index.js",
+        "start:prod": "node index.js"
     },
     "dependencies": {
         "express": "^4.21.1",
