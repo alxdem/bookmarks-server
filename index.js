@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const data = await getCategories('userId63324');
-    console.log('res', res);
     res.send(data);
 });
 
