@@ -1,6 +1,6 @@
 import express from 'express';
-import { getCategories } from './src/methods/category.js';
 import mongoose from 'mongoose';
+import { getCategories } from './src/methods/category.js';
 
 const { DB_USER, DB_PASSWORD, DB_NAME } = process.env || {};
 
