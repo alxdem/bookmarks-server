@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { getCategories } from './src/methods/category.js';
+import categoriesRouter from './src/routes/categories.js';
+import authRouter from './src/routes/auth.js';
 
 const { DB_USER, DB_PASSWORD, DB_NAME } = process.env || {};
 
@@ -14,24 +15,13 @@ const db = mongoose.connection;
 db.on('error', error => console.error('Не смогли подключиться к базе', error));
 
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(categoriesRouter);
+app.use('/auth', authRouter);
 
-app.get('/categories', async (req, res) => {
-    const data = await getCategories('userId63324');
-    res.send(data);
-});
-
-app.get('/home', (req, res) => {
-    res.send({
-        "name": "Petr",
-        "age": 30
-    });
-});
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`);
 });
