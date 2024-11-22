@@ -1,5 +1,4 @@
 import express from 'express';
-import { getError } from '../utils/utils.js';
 import categoryController from '../controllers/categoryController.js';
 
 const categoriesRouter = express();

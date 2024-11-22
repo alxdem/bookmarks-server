@@ -26,7 +26,7 @@ class CategoryController {
             }
 
             if (!title) {
-                return res.status(400).json(getError('Не заполнен заголовок'));
+                return res.status(400).json(getError(text.TITLE_EMPTY));
             }
 
             const category = new CategoryModel({
@@ -85,7 +85,7 @@ class CategoryController {
                 { new: true }
             );
 
-            category.save(category);
+            category.save();
 
             return res.json(category);
         } catch (err) {
@@ -108,7 +108,7 @@ class CategoryController {
             });
 
             if (!category) {
-                return res.status(404).json({ error: 'Категория не найдена' });
+                return res.status(404).json({ error: text.CATEGORY_NOT_FOUND });
             }
 
             return res.json(category);

@@ -44,8 +44,6 @@ class AuthController {
             const { name, password } = req.body || {};
             const user = await UserModel.findOne({ name });
 
-            console.log('* user', user);
-
             if (!user) {
                 return res.status(400).json({
                     message: `Пользователь с именем ${name} не найден`
@@ -53,7 +51,6 @@ class AuthController {
             }
 
             const isPasswordValid = bcrypt.compareSync(password, user.password);
-            console.log('* isPasswordValid', isPasswordValid);
 
             if (!isPasswordValid) {
                 return res.status(400).json({

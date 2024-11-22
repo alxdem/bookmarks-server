@@ -14,4 +14,4 @@ const BookmarkSchema = new Schema({
     image: String,
 });
 
-export default model('BookmarkModel', BookmarkSchema);
+export default model('item', BookmarkSchema);

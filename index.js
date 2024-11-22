@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import categoriesRouter from './src/routes/categories.js';
 import authRouter from './src/routes/auth.js';
+import itemsRouter from './src/routes/items.js';
 
 const { DB_USER, DB_PASSWORD, DB_NAME } = process.env || {};
 
@@ -20,8 +21,9 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(categoriesRouter);
+app.use(itemsRouter);
 app.use('/auth', authRouter);
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+    console.log(`Сервер запущен на порту ${PORT}`);
 });
