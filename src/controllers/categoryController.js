@@ -11,10 +11,6 @@ class CategoryController {
                 userId: userId,
             });
 
-            if (data.length < 1) {
-                return 'Empty array';
-            }
-
             return res.json(data);
         } catch (err) {
             return res.status(500).json(getError(text.SERVER_ERROR, err));
