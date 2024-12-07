@@ -18,7 +18,7 @@
                 "PATCH"
             ],
             "headers": {
-                "Access-Control-Allow-Origin": "localhost:5173"
+                "Access-Control-Allow-Origin": "*"
             }
         }
     ]
