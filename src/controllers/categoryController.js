@@ -11,7 +11,8 @@ class CategoryController {
                 userId: userId,
             });
 
-            return res.json(data);
+            // return res.json(data);
+            return data;
         } catch (err) {
             return res.status(500).json(getError(text.SERVER_ERROR, err));
         }
