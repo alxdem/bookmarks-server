@@ -5,15 +5,12 @@ import { text } from '../utils/variables.js';
 class CategoryController {
     async getCategories(req, res) {
         try {
-            const { userId } = req.body || {};
+            const { userId } = req.query || {};
 
             const data = await CategoryModel.find({
                 userId: userId,
             });
 
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
             return res.json(data);
         } catch (err) {
             return res.status(500).json(getError(text.SERVER_ERROR, err));
