@@ -7,7 +7,7 @@ import { text } from '../utils/variables.js';
 class ItemController {
     async getItems(req, res) {
         try {
-            const { userId } = req.body || {};
+            const { userId } = req.query || {};
 
             const data = await itemModel.find({
                 userId: userId,
