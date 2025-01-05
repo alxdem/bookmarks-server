@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 const { SECRET } = process.env || {};
 
 const jwtMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
+    const authorizationData = req.headers.authorization;
+    const token = authorizationData.split(' ')[1] || '';
 
     console.log('++ token', token);
     console.log('req.headers', req.headers);
