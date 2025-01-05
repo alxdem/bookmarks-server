@@ -2,7 +2,11 @@ import jwt from 'jsonwebtoken';
 const { SECRET } = process.env || {};
 
 const jwtMiddleware = (req, res, next) => {
-    const token = req.body.token;
+    const token = req.headers.authorization;
+
+    console.log('++ token', token);
+    console.log('req.headers', req.headers);
+    console.log('req.header', req.header);
 
     try {
         req.user = jwt.verify(token, SECRET);
