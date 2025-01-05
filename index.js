@@ -14,6 +14,8 @@ mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
 
+console.log('- DB: ', db);
+
 db.on('error', error => console.error('Не смогли подключиться к базе', error));
 
 const app = express();
