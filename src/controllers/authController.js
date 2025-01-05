@@ -40,10 +40,17 @@ class AuthController {
     }
 
     async login(req, res) {
-        res.header('Access-Control-Allow-Origin', '*');
+        // res.header('Access-Control-Allow-Origin', '*');
         try {
             const { name, password } = req.body || {};
+
+            console.log('req', req);
+            console.log('res', res);
+            console.log('name', name);
+
             const user = await UserModel.findOne({ name });
+
+            console.log('- user', user);
 
             if (!user) {
                 return res.status(400).json({
