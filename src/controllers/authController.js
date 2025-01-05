@@ -64,6 +64,7 @@ class AuthController {
             return res.json({ token });
         } catch (err) {
             res.status(400).json(getError('Ошибка авторизации'));
+            console.log('err', err);
             return err;
         }
     }
