@@ -5,10 +5,6 @@ const jwtMiddleware = (req, res, next) => {
     const authorizationData = req.headers.authorization;
     const token = authorizationData.split(' ')[1] || '';
 
-    console.log('++ token', token);
-    console.log('req.headers', req.headers);
-    console.log('req.header', req.header);
-
     try {
         req.user = jwt.verify(token, SECRET);
         next();
