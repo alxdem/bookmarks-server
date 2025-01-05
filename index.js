@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import categoriesRouter from './src/routes/categories.js';
 import authRouter from './src/routes/auth.js';
 import itemsRouter from './src/routes/items.js';
@@ -18,6 +19,7 @@ db.on('error', error => console.error('Не смогли подключитьс�
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(categoriesRouter);
