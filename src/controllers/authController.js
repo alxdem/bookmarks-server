@@ -60,7 +60,10 @@ class AuthController {
 
             const token = generateAccessToken(user._id);
 
-            return res.json({ token });
+            return res.json({
+                token,
+                userId: user._id,
+            });
         } catch (err) {
             res.status(400).json(getError('Ошибка авторизации'));
             return err;
