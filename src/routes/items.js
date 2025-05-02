@@ -13,4 +13,6 @@ itemsRouter.patch('/items/:itemId', ItemController.update);
 
 itemsRouter.delete('/items/:itemId', ItemController.delete);
 
+itemsRouter.post('items/reorder', ItemController.reorder);
+
 export default itemsRouter;

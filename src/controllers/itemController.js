@@ -153,6 +153,30 @@ class ItemController {
             return res.status(500).json(getError(text.SERVER_ERROR, err));
         }
     }
+
+    async reorder(req, res) {
+        try {
+            const updates = req.body;
+            const changeElements = updates.map(item => ({
+                updateOne: {
+                    filter: {
+                        _id: item._id,
+                    },
+                    update: {
+                        $set: {
+                            order: item.order,
+                        }
+                    }
+                }
+            }));
+            console.log('changeElements', changeElements);
+            await itemModel.bulkWrite(changeElements);
+
+            return res.json(changeElements);
+        } catch (err) {
+            return res.status(500).json(getError(text.ORDER_NOT_CHANGE, err));
+        }
+    }
 }
 
 export default new ItemController();

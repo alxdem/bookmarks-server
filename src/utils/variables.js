@@ -5,6 +5,7 @@ const text = {
     SERVER_ERROR: 'Произошла внутренняя ошибка сервера',
     TITLE_EMPTY: 'Не заполнен заголовок',
     URL_EMPTY: 'Не заполнен url',
+    ORDER_NOT_CHANGE: 'Не получилось поменять порядок',
 };
 
 export {
