@@ -156,7 +156,7 @@ class ItemController {
 
     async reorder(req, res) {
         try {
-            const updates = req.body;
+            const updates = req.body?.reordered;
             console.log('updates', updates);
             const changeElements = updates.map(item => ({
                 updateOne: {
