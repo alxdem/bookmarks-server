@@ -66,7 +66,7 @@ class ItemController {
 
             const lastItem = await itemModel
                 .findOne({
-                    _id: categoryId,
+                    categoryId: categoryId,
                     userId: userId,
                 })
                 .sort({
@@ -77,6 +77,7 @@ class ItemController {
             const nextOrder = lastItem ? lastItem.order + 1 : 0;
 
             console.log('----- lastItem', lastItem);
+            console.log('----- nextOrder', nextOrder);
 
             const item = new itemModel({
                 url,
