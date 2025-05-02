@@ -166,10 +166,7 @@ class ItemController {
                     }
                 }
             }));
-            const a = await itemModel.bulkWrite(changeElements);
-
-            console.log('--- changeElements', changeElements);
-            console.log('a', a);
+            await itemModel.bulkWrite(changeElements);
 
             return res.status(200).json({ success: true });
         } catch (err) {
