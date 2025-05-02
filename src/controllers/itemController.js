@@ -157,6 +157,7 @@ class ItemController {
     async reorder(req, res) {
         try {
             const updates = req.body;
+            console.log('updates', updates);
             const changeElements = updates.map(item => ({
                 updateOne: {
                     filter: {
@@ -174,6 +175,7 @@ class ItemController {
 
             return res.json(changeElements);
         } catch (err) {
+            console.log('---err', err);
             return res.status(500).json(getError(text.ORDER_NOT_CHANGE, err));
         }
     }
