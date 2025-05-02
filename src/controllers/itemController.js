@@ -33,7 +33,6 @@ class ItemController {
                 categoryId,
                 userId,
                 image,
-                order = 0,
             } = req.body || {};
 
             if (!userId) {
