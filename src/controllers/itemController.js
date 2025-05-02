@@ -154,8 +154,6 @@ class ItemController {
     async reorder(req, res) {
         try {
             const updates = req.body?.reordered;
-            console.log('req.body:', req.body);
-            console.log('typeof req.body:', typeof req.body);
             const changeElements = updates.map(item => ({
                 updateOne: {
                     filter: {
@@ -170,7 +168,7 @@ class ItemController {
             }));
             await itemModel.bulkWrite(changeElements);
 
-            return res.status(200);
+            return res.status(200).json({ success: true });
         } catch (err) {
             return res.status(500).json(getError(text.ORDER_NOT_CHANGE, err));
         }
