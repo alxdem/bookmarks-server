@@ -76,9 +76,6 @@ class ItemController {
 
             const nextOrder = lastItem ? lastItem.order + 1 : 0;
 
-            console.log('----- lastItem', lastItem);
-            console.log('----- nextOrder', nextOrder);
-
             const item = new itemModel({
                 url,
                 order: nextOrder,
@@ -157,7 +154,6 @@ class ItemController {
     async reorder(req, res) {
         try {
             const updates = req.body?.reordered;
-            console.log('updates', updates);
             const changeElements = updates.map(item => ({
                 updateOne: {
                     filter: {
@@ -170,12 +166,10 @@ class ItemController {
                     }
                 }
             }));
-            console.log('changeElements', changeElements);
             await itemModel.bulkWrite(changeElements);
 
-            return res.json(changeElements);
+            return res.status(200);
         } catch (err) {
-            console.log('---err', err);
             return res.status(500).json(getError(text.ORDER_NOT_CHANGE, err));
         }
     }
