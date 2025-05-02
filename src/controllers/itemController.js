@@ -9,9 +9,14 @@ class ItemController {
         try {
             const { userId } = req.query || {};
 
-            const data = await itemModel.find({
-                userId: userId,
-            });
+            const data = await itemModel
+                .find({
+                    userId: userId,
+                })
+                .sort({
+                    order: 1,
+                })
+                .lean();
 
             return res.json(data);
         } catch (err) {
@@ -60,9 +65,23 @@ class ItemController {
                 }
             }
 
+            const lastItem = await itemModel
+                .findOne({
+                    _id: categoryId,
+                    userId: userId,
+                })
+                .sort({
+                    order: -1,
+                })
+                .lean();
+
+            const nextOrder = lastItem ? lastItem.order + 1 : 0;
+
+            console.log('----- lastItem', lastItem);
+
             const item = new itemModel({
                 url,
-                order,
+                order: nextOrder,
                 title,
                 description,
                 userId,
