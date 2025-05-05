@@ -5,18 +5,22 @@ import { getError } from '../utils/utils.js';
 import { text } from '../utils/variables.js';
 
 class ItemController {
-    async getItemsData(userId) {
-        const data = await itemModel
-            .find({
-                userId: userId,
-            })
-            .sort({
-                order: 1,
-            })
-            .lean();
+    async getItemsData(userId, res) {
+        try {
+            const data = await itemModel
+                .find({
+                    userId: userId,
+                })
+                .sort({
+                    order: 1,
+                })
+                .lean();
 
-        console.log('getItemsData', data);
-        return data;
+            console.log('getItemsData', data);
+            return data;
+        } catch (err) {
+            return res.status(500).json(getError(text.SERVER_ERROR, err));
+        }
     }
 
     async getItems(req, res) {
