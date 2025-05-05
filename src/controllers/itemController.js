@@ -27,7 +27,16 @@ class ItemController {
         try {
             const { userId } = req.query || {};
 
-            const data = await this.getItemsData(userId);
+            // const data = await this.getItemsData(userId);
+
+            const data = await itemModel
+                .find({
+                    userId: userId,
+                })
+                .sort({
+                    order: 1,
+                })
+                .lean();
             console.log('getItems', data);
 
             return res.json(data);
