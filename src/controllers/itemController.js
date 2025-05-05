@@ -5,7 +5,7 @@ import { getError } from '../utils/utils.js';
 import { text } from '../utils/variables.js';
 
 class ItemController {
-    async getItemsData() {
+    async getItemsData(userId) {
         const data = await itemModel
             .find({
                 userId: userId,
@@ -23,7 +23,7 @@ class ItemController {
         try {
             const { userId } = req.query || {};
 
-            const data = await this.getItemsData();
+            const data = await this.getItemsData(userId);
             console.log('getItems', data);
 
             return res.json(data);
@@ -161,6 +161,7 @@ class ItemController {
 
     async reorder(req, res) {
         try {
+            const { userId } = req.query || {};
             const updates = req.body?.reordered;
             const changeElements = updates.map(item => ({
                 updateOne: {
@@ -176,7 +177,7 @@ class ItemController {
             }));
             await itemModel.bulkWrite(changeElements);
 
-            const data = await this.getItemsData();
+            const data = await this.getItemsData(userId);
 
             return res.status(200).json({
                 success: true,
