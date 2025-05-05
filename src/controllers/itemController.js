@@ -190,7 +190,8 @@ class ItemController {
             }));
             await itemModel.bulkWrite(changeElements);
 
-            console.log('- bulkWrite');
+            console.log('- this', this);
+            console.log('- this.getItemsData', this.getItemsData);
 
             const data = await this.getItemsData(userId);
 
