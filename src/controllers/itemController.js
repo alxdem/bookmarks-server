@@ -173,6 +173,7 @@ class ItemController {
     }
 
     async reorder(req, res) {
+        console.log('reorder req', req);
         try {
             const { userId } = req.query || {};
             const updates = req.body?.reordered;
