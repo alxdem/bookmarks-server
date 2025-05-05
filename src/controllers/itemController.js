@@ -173,7 +173,7 @@ class ItemController {
     }
 
     async reorder(req, res) {
-        console.log('reorder req', req);
+        console.log('reorder req.body', req.body);
         try {
             const { reordered, userId } = req.body || {};
             const changeElements = reordered.map(item => ({
@@ -189,6 +189,8 @@ class ItemController {
                 }
             }));
             await itemModel.bulkWrite(changeElements);
+
+            console.log('- bulkWrite');
 
             const data = await this.getItemsData(userId);
 
