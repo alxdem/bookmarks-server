@@ -5,7 +5,8 @@ import { getError } from '../utils/utils.js';
 import { text } from '../utils/variables.js';
 
 class ItemController {
-    async getItemsData(userId, res) {
+    async getItemsData(userId) {
+        console.log('getItemsData userId', userId);
         try {
             const data = await itemModel
                 .find({
@@ -19,7 +20,7 @@ class ItemController {
             console.log('getItemsData', data);
             return data;
         } catch (err) {
-            return res.status(500).json(getError(text.SERVER_ERROR, err));
+            console.error(text.SERVER_ERROR, err)
         }
     }
 
@@ -37,7 +38,6 @@ class ItemController {
                     order: 1,
                 })
                 .lean();
-            console.log('getItems', data);
 
             return res.json(data);
         } catch (err) {
@@ -191,6 +191,8 @@ class ItemController {
             await itemModel.bulkWrite(changeElements);
 
             const data = await this.getItemsData(userId);
+
+            console.log('reorder', data);
 
             return res.status(200).json({
                 success: true,
