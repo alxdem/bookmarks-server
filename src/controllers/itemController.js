@@ -11,7 +11,6 @@ class ItemController {
     }
 
     async getItemsData(userId) {
-        console.log('getItemsData userId', userId);
         try {
             const data = await itemModel
                 .find({
@@ -22,7 +21,6 @@ class ItemController {
                 })
                 .lean();
 
-            console.log('getItemsData', data);
             return data;
         } catch (err) {
             console.error(text.SERVER_ERROR, err)
@@ -168,7 +166,6 @@ class ItemController {
     }
 
     async reorder(req, res) {
-        console.log('reorder req.body', req.body);
         try {
             const { reordered, userId } = req.body || {};
             const changeElements = reordered.map(item => ({
@@ -185,12 +182,7 @@ class ItemController {
             }));
             await itemModel.bulkWrite(changeElements);
 
-            console.log('- this', this);
-            console.log('- this.getItemsData', this.getItemsData);
-
             const data = await this.getItemsData(userId);
-
-            console.log('reorder', data);
 
             return res.status(200).json({
                 success: true,
