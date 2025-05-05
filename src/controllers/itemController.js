@@ -5,18 +5,24 @@ import { getError } from '../utils/utils.js';
 import { text } from '../utils/variables.js';
 
 class ItemController {
+    async #getItemsData() {
+        const data = await itemModel
+            .find({
+                userId: userId,
+            })
+            .sort({
+                order: 1,
+            })
+            .lean();
+
+        return data;
+    }
+
     async getItems(req, res) {
         try {
             const { userId } = req.query || {};
 
-            const data = await itemModel
-                .find({
-                    userId: userId,
-                })
-                .sort({
-                    order: 1,
-                })
-                .lean();
+            const data = await this.#getItemsData();
 
             return res.json(data);
         } catch (err) {
@@ -168,7 +174,12 @@ class ItemController {
             }));
             await itemModel.bulkWrite(changeElements);
 
-            return res.status(200).json({ success: true });
+            const data = await this.#getItemsData();
+
+            return res.status(200).json({
+                success: true,
+                data,
+            });
         } catch (err) {
             return res.status(500).json(getError(text.ORDER_NOT_CHANGE, err));
         }
