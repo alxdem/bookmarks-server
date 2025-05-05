@@ -5,6 +5,11 @@ import { getError } from '../utils/utils.js';
 import { text } from '../utils/variables.js';
 
 class ItemController {
+    constructor() {
+        this.getItems = this.getItems.bind(this);
+        this.reorder = this.reorder.bind(this);
+    }
+
     async getItemsData(userId) {
         console.log('getItemsData userId', userId);
         try {
@@ -27,17 +32,7 @@ class ItemController {
     async getItems(req, res) {
         try {
             const { userId } = req.query || {};
-
-            // const data = await this.getItemsData(userId);
-
-            const data = await itemModel
-                .find({
-                    userId: userId,
-                })
-                .sort({
-                    order: 1,
-                })
-                .lean();
+            const data = await this.getItemsData(userId);
 
             return res.json(data);
         } catch (err) {
