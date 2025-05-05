@@ -175,9 +175,8 @@ class ItemController {
     async reorder(req, res) {
         console.log('reorder req', req);
         try {
-            const { userId } = req.query || {};
-            const updates = req.body?.reordered;
-            const changeElements = updates.map(item => ({
+            const { reordered, userId } = req.body || {};
+            const changeElements = reordered.map(item => ({
                 updateOne: {
                     filter: {
                         _id: item._id,
